@@ -414,6 +414,7 @@ class TfPoseEstimator:
             # draw point
             for i in range(common.CocoPart.Background.value):
                 if i not in human.body_parts.keys():
+                    centers[i] = (0.0, 0.0)
                     continue
 
                 body_part = human.body_parts[i]
