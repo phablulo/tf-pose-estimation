@@ -440,13 +440,15 @@ class TfPoseEstimator:
         poses = []
         for human in humans:
             centers = {}
+            flat = [0.0 for i in range(36)]
             for i in range(common.CocoPart.Background.value):
                 if i not in human.body_parts.keys():
                     continue
                 body_part = human.body_parts[i]
                 center = (int(body_part.x * image_w + 0.5), int(body_part.y * image_h + 0.5))
-                centers[i] = center
-            poses.append(centers)
+                flat[i*2] = center[0]
+                flat[i*2+1] = center[1]
+            poses.append(flat)
         return poses
 
     def _get_scaled_img(self, npimg, scale):
